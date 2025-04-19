@@ -15,8 +15,15 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt("Enter your choice - rock, paper or scissor")
-    return humanChoice.toLowerCase()
+
+    return new Promise((resolve)=>{
+        const choicesContainer=document.querySelector(".choicesContainer")
+        choicesContainer.addEventListener("click",function(e){
+            if(e.target.tagName==="BUTTON"){
+                resolve(e.target.textContent)
+            }
+        });
+    });
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -28,12 +35,12 @@ function playRound(humanChoice, computerChoice) {
             result = "Computer wins, paper beats rock"
             computerScore++
         } else if (computerChoice == "scissor") {
-            result = "You win, rock beats scissor"
+            result = "You win! rock beats scissor"
             humanScore++
         }
     } else if (humanChoice == "paper") {
         if (computerChoice == "rock") {
-            result = "You win, paper beats rock"
+            result = "You win! paper beats rock"
             humanScore++
         } else if (computerChoice == "scissor") {
             result = "Computer wins, scissor beats paper"
@@ -41,7 +48,7 @@ function playRound(humanChoice, computerChoice) {
         }
     } else if (humanChoice == "scissor") {
         if (computerChoice == "paper") {
-            result = "You win, scissor beats paper"
+            result = "You win! scissor beats paper"
             humanScore++
         } else if (computerChoice == "rock") {
             result = "Computer wins, rock beats scissor"
@@ -51,20 +58,47 @@ function playRound(humanChoice, computerChoice) {
     return result;
 }
 
-function playGame(){
+async function playGame(){
+    let finalResult
     do{
-        const humanSelection = getHumanChoice()
+        const humanSelection = await getHumanChoice()
         const computerSelection = getComputerChoice()
         let result=playRound(humanSelection, computerSelection)
+        displayRoundResult(result)
+        displayScore()
         console.log(result)
     }while(humanScore!=5 && computerScore!=5);
 
     if(humanScore==5){
-        console.log("You win the game")
+        finalResult="You win the game!! reload the page to try again"
+        displayFinalResult(finalResult)
+        console.log(finalResult)
     }else if(computerScore==5){
-        console.log("Computer wins the game")
+        finalResult="Computer wins the game reload the page to try again"
+        displayFinalResult(finalResult)
+        console.log(finalResult)
     }
 }
 
+function displayRoundResult(result){
+    const roundResult=document.querySelector(".roundResult")
+    const resultLine=document.querySelector(".roundResult p")
+    resultLine.textContent=result
+    roundResult.appendChild(resultLine)
+}
 
-console.log(playGame());
+function displayFinalResult(finalResult){
+    const finalResultDiv=document.querySelector(".finalResultDiv")
+    const finalLine=document.querySelector(".finalResultDiv p")
+    finalLine.textContent=finalResult
+    finalResultDiv.appendChild(finalLine)
+}
+
+function displayScore(){
+    const humanScoreDiv=document.querySelector(".humanScore")
+    const compScoreDiv=document.querySelector(".compScore")
+    humanScoreDiv.textContent=`Player score: ${humanScore}`
+    compScoreDiv.textContent=`Computer score: ${computerScore}`
+}
+
+playGame()
