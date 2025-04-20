@@ -1,0 +1,66 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+}
+
+header{
+    height: 6vh;
+    width: 100vw;
+    text-align: center;
+    padding-top: 2vh;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #fae1f8;
+}
+
+.container{
+    display: flex;
+    background-color: #e1abfa;
+    width: 100vw;
+    height: 92vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.sketchPad{
+    width: 65vw;
+    height: 65vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.buttons{
+    width: 10vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.buttons button{
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fae1f8;
+    font-size: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.buttons button:hover {
+    background-color: #fefcff; 
+    transform: scale(1.05); 
+    cursor: pointer; 
+}
+
+.line{
+    display: flex;
+}
