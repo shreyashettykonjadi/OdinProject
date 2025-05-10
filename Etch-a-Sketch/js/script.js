@@ -101,6 +101,3 @@ function getColor(choice,eraser){
 function eraser(){
     Eraser=!Eraser
 }
-
-
-
